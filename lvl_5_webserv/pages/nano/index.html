@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>42_WebServ v1.0</title>
+    <link rel="stylesheet" href="fontawesome/css/all.min.css" />
+    <!-- https://fontawesome.com/ -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap"
+      rel="stylesheet"
+    />
+    <!-- https://fonts.google.com/ -->
+    <link href="css/magnific-popup.min.css" rel="stylesheet" />
+    <link href="css/tooplate-style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="tm-container-fluid">
+      <section
+        class="tm-site-header tm-flex-center tm-mb-50 tm-bgcolor-1 tm-border-rounded"
+      >
+        <i class="fa fa-star fa-3x"></i>
+        <h1>42_WebServ</h1>
+      </section>
+
+      <section class="tm-about tm-mb-80 tm-p-50 tm-bgcolor-2 tm-border-rounded">
+        <div class="tm-about-header tm-flex-center">
+          <i class="fas fa-users fa-2x"></i>
+          <h2>This project</h2>
+        </div>
+        <div class="tm-about-text">
+          <p class="tm-mb-40">
+            This project is here to make you write your own HTTP server. You
+            will be able to test it with a real browser. HTTP is one of the most
+            used protocol on internet. Knowing its arcane will be useful, even
+            if you won't be working on a website.
+          </p>
+        </div>
+      </section>
+
+      <section class="tm-contact tm-mb-50 tm-bgcolor-3 tm-border-rounded">
+        <div class="tm-contact-form-container">
+          <h2 class="tm-h2">Upload file</h2>
+          <form
+            id="contact-form"
+            action="/upload/upload_file.py"
+            enctype="multipart/form-data"
+            method="POST"
+            class="tm-contact-form"
+          >
+            <input type="file" name="filename" />
+            <button type="submit" class="tm-center tm-btn-submit">
+              Upload
+            </button>
+          </form>
+        </div>
+
+        <div class="tm-contact-form-container">
+          <h2 class="tm-h2">CGI GET example</h2>
+          <form
+            action="/cgi_get/get_example.py"
+            method="GET"
+            class="tm-contact-form"
+          >
+            <button class="tm-center tm-btn-submit">
+              Show me!
+            </button>
+          </form>
+        </div>
+
+        <div class="tm-contact-form-container">
+          <h2>Delete File</h2>
+            <input type="text" id="filename" name="filename" />
+            <button onclick="sendDeleteRequest()">Delete File</button>
+          </div>
+        </div>
+      </section>
+
+      <footer class="tm-footer">42 Porto</footer>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+
+    <script>
+      function sendDeleteRequest() {
+        const filename = document.getElementById("filename").value;
+        fetch("/delete/" + filename, {
+          method: "DELETE",
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error ${response.status}`);
+            }
+            console.log(`File '${filename}' deleted successfully`);
+          })
+          .catch((error) => {
+            console.error(`Error deleting file '${filename}':`, error);
+          });
+      }
+    </script>
+  </body>
+</html>
