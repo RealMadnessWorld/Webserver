@@ -47,7 +47,7 @@ Project done in collaboration with:
 		git clone https://github.com/RealMadnessWorld/Webserver
 - Navigate to Webserv and run `make`
 
-		cd Webserv
+		cd Webserv/lvl_5_webserv
 		make
 - Run webserv
 
